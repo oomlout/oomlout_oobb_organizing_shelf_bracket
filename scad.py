@@ -14,8 +14,8 @@ def make_scad(**kwargs):
         filter = ""
         #filter = "test"
 
-        #kwargs["save_type"] = "none"
-        kwargs["save_type"] = "all"
+        kwargs["save_type"] = "none"
+        #kwargs["save_type"] = "all"
         
         kwargs["overwrite"] = True
         
@@ -147,6 +147,7 @@ def get_base(thing, **kwargs):
         p3["type"] = "n"
         p3["shape"] = f"oobb_screw_countersunk"
         p3["depth"] = dep
+        p3["radius_name"] = "m3d5_screw_wood"
         p3["m"] = "#"
         p3["clearance"] = "top"
         pos1 = copy.deepcopy(pos)
@@ -168,6 +169,7 @@ def get_base(thing, **kwargs):
         p3["type"] = "n"
         p3["shape"] = f"oobb_screw_countersunk"
         p3["depth"] = dep
+        p3["radius_name"] = "m3d5_screw_wood"
         p3["m"] = "#"
         p3["clearance"] = "top"
         pos1 = copy.deepcopy(pos)
