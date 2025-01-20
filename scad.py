@@ -15,7 +15,7 @@ def make_scad(**kwargs):
         filter = "shelf_bracket_version_2"
 
         kwargs["save_type"] = "none"
-        kwargs["save_type"] = "all"
+        #kwargs["save_type"] = "all"
         
         kwargs["overwrite"] = True
         
@@ -50,21 +50,26 @@ def make_scad(**kwargs):
         
         parts.append(part)
 
-        #version 2
-        part = copy.deepcopy(part_default)
-        p3 = copy.deepcopy(kwargs)
-        p3["width"] = 10
-        p3["height"] = 5
-        p3["thickness"] = 14
-        p3["extra"] = "attach_side_18_mm_depth_shelf"
-        part["kwargs"] = p3
-        part["name"] = "shelf_bracket_version_2"
-        
-        parts.append(part)
 
-        part = copy.deepcopy(part)
-        part["kwargs"]["extra"] = ""
-        parts.append(part)
+        extras = []
+        extras.append("attach_left_side_18_mm_depth_shelf")
+        extras.append("attach_right_side_18_mm_depth_shelf")
+        extras.append("")
+
+        #version 2
+        for extra in extras:
+            part = copy.deepcopy(part_default)
+            p3 = copy.deepcopy(kwargs)
+            p3["width"] = 10
+            p3["height"] = 5
+            p3["thickness"] = 14
+            p3["extra"] = extra
+            part["kwargs"] = p3
+            part["name"] = "shelf_bracket_version_2"
+            
+            parts.append(part)
+
+        
 
     #make the parts
     if True:
@@ -514,7 +519,11 @@ def get_shelf_bracket_version_2(thing, **kwargs):
             pos1 = copy.deepcopy(pos)
             pos1[0] += 0
             pos1[1] += depth_shelf/2 + height*15/2
-            pos1[2] += 0
+            #moving z depending on side
+            if "attach_left" in extra:
+                pos1[2] += 0
+            elif "attach_right" in extra:
+                pos1[2] += depth_endcap
             p3["pos"] = pos1
             #p3["m"] = "#"   
             oobb_base.append_full(thing,**p3)
@@ -596,7 +605,8 @@ def get_shelf_bracket_version_2(thing, **kwargs):
             p3["type"] = "n"
             p3["shape"] = f"oobb_screw_countersunk"
             p3["depth"] = dep
-            p3["radius_name"] = "m3d5_screw_wood"
+            #p3["radius_name"] = "m3d5_screw_wood"
+            p3["radius_name"] = "m3_screw_wood"
             p3["m"] = "#"
             p3["clearance"] = "top"
             pos1 = copy.deepcopy(pos)
@@ -619,7 +629,8 @@ def get_shelf_bracket_version_2(thing, **kwargs):
 
         if True:
             shap = f"oobb_screw_countersunk"
-            rad_name = "m3d5_screw_wood"
+            #rad_name = "m3d5_screw_wood"
+            rad_name = "m3_screw_wood"
             hole_extra = 0        
             p3 = copy.deepcopy(kwargs)
             p3["type"] = "n"
@@ -653,7 +664,10 @@ def get_shelf_bracket_version_2(thing, **kwargs):
                 pos1[2] += shift_z
                 p4["pos"] = pos1
                 rot1 = copy.deepcopy(rot)
-                rot1[1] = 0                
+                rot1[1] = 0     
+                if "attach_right" in extra:
+                    rot1[1] = 180 
+                    pos1[2] += -dep          
                 p4["rot"] = rot1
                 oobb_base.append_full(thing,**p4)
 
@@ -673,6 +687,9 @@ def get_shelf_bracket_version_2(thing, **kwargs):
                 rot1 = copy.deepcopy(rot)
                 rot1[1] = 0                
                 p4["rot"] = rot1
+                if "attach_right" in extra:
+                    rot1[1] = 180 
+                    pos1[2] += -dep   
                 oobb_base.append_full(thing,**p4)
 
 
