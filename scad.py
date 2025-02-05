@@ -14,8 +14,8 @@ def make_scad(**kwargs):
         filter = ""
         filter = "shelf_version_2"
 
-        kwargs["save_type"] = "none"
-        #kwargs["save_type"] = "all"
+        #kwargs["save_type"] = "none"
+        kwargs["save_type"] = "all"
         
         kwargs["overwrite"] = True
         
@@ -623,6 +623,7 @@ def get_shelf_bracket_version_2(thing, **kwargs):
         dep = 14
         #short side wall side screws
         if True:
+            
             p3 = copy.deepcopy(kwargs)
             p3["type"] = "n"
             p3["shape"] = f"oobb_screw_countersunk"
@@ -802,7 +803,7 @@ def get_shelf_version_2(thing, **kwargs):
     #add countersunk screws
     if True:
         dep = 16 + 5
-        shift_nut = 12
+        shift_nut = 10
         
 
         if True:
@@ -829,8 +830,9 @@ def get_shelf_version_2(thing, **kwargs):
             p3_nut["shape"] = f"oobb_nut"
             #p3_nut["depth"] = dep
             p3_nut["radius_name"] = "m3"
+            p3_nut["extra_clearance"] = 0.25
             p3_nut["m"] = "#"
-            pos1 = copy.deepcopy(pos)
+            pos1 = copy.deepcopy(pos)            
             pos1[2] += 0
             p3_nut["pos"] = pos1
             rot1 = copy.deepcopy(rot)
@@ -843,34 +845,34 @@ def get_shelf_version_2(thing, **kwargs):
             if True:
                 poss = []
                 pos_deets = {}
-                pos_deets["shift_width_screw"] = -width_mm/2 + 15
+                pos_deets["shift_width_screw"] = -(width - 3)/2 * 15#-width_mm/2 + 15
                 pos_deets["shift_height_screw"] = -height_mm/2 - 5
                 pos_deets["rot_screw"] = [0,0,0]
-                pos_deets["shift_width_nut"] = -width_mm/2 + 15
+                pos_deets["shift_width_nut"] = -(width_mm-3)/2 + 15
                 pos_deets["shift_height_nut"] = -height_mm/2 + shift_nut                
                 poss.append(pos_deets)
 
                 pos_deets = {}
-                pos_deets["shift_width_screw"] = width_mm/2 - 15
+                pos_deets["shift_width_screw"] = (width - 3)/2 * 15#-width_mm/2 + 15
                 pos_deets["shift_height_screw"] = -height_mm/2 - 5
                 pos_deets["rot_screw"] = [0,0,0]
-                pos_deets["shift_width_nut"] = width_mm/2 - 15
+                pos_deets["shift_width_nut"] = (width_mm-3)/2 - 15
                 pos_deets["shift_height_nut"] = -height_mm/2 + shift_nut
                 poss.append(pos_deets)
 
                 pos_deets = {}
-                pos_deets["shift_width_screw"] = width_mm/2 - 15
+                pos_deets["shift_width_screw"] = (width - 3)/2 * 15#-width_mm/2 + 15
                 pos_deets["shift_height_screw"] = height_mm/2 + 5
                 pos_deets["rot_screw"] = [0,0,180]
-                pos_deets["shift_width_nut"] = width_mm/2 - 15
+                pos_deets["shift_width_nut"] = (width_mm-3)/2 - 15
                 pos_deets["shift_height_nut"] = height_mm/2 - shift_nut
                 poss.append(pos_deets)
 
                 pos_deets = {}
-                pos_deets["shift_width_screw"] = -width_mm/2 + 15
+                pos_deets["shift_width_screw"] = -(width - 3)/2 * 15#-width_mm/2 + 15
                 pos_deets["shift_height_screw"] = height_mm/2 + 5
                 pos_deets["rot_screw"] = [0,0,180]
-                pos_deets["shift_width_nut"] = -width_mm/2 + 15
+                pos_deets["shift_width_nut"] = -(width_mm-3)/2 + 15
                 pos_deets["shift_height_nut"] = height_mm/2 - shift_nut
                 poss.append(pos_deets)
 
