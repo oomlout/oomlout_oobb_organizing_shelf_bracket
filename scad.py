@@ -12,7 +12,7 @@ def make_scad(**kwargs):
     # save_type variables
     if True:
         filter = ""
-        filter = "shelf_bracket_version_2"
+        filter = "shelf_version_2"
 
         kwargs["save_type"] = "none"
         #kwargs["save_type"] = "all"
@@ -65,11 +65,33 @@ def make_scad(**kwargs):
             p3["thickness"] = 14
             p3["extra"] = extra
             part["kwargs"] = p3
-            part["name"] = "shelf_bracket_version_2"
-            
+            part["name"] = "shelf_bracket_version_2"            
             parts.append(part)
 
-        
+            part = copy.deepcopy(part_default)
+            p3 = copy.deepcopy(kwargs)
+            p3["width"] = 5
+            p3["height"] = 3
+            p3["thickness"] = 14
+            p3["extra"] = extra
+            part["kwargs"] = p3
+            part["name"] = "shelf_bracket_version_2"
+            parts.append(part)
+
+        #shelf tops        
+        part = copy.deepcopy(part_default)
+        p3 = copy.deepcopy(kwargs)
+        p3["width"] = 5
+        p3["height"] = 7
+        p3["thickness"] = 18
+        p3["extra"] = extra
+        part["kwargs"] = p3
+        part["name"] = "shelf_version_2"
+        parts.append(part)
+    
+
+
+
 
     #make the parts
     if True:
@@ -708,6 +730,180 @@ def get_shelf_bracket_version_2(thing, **kwargs):
             pos1[0] += (i) * 15
             p3["pos"] = pos1
             oobb_base.append_full(thing,**p3)
+        
+
+
+    if prepare_print:
+        #put into a rotation object
+        components_second = copy.deepcopy(thing["components"])
+        return_value_2 = {}
+        return_value_2["type"]  = "rotation"
+        return_value_2["typetype"]  = "p"
+        pos1 = copy.deepcopy(pos)
+        pos1[0] += 50
+        return_value_2["pos"] = pos1
+        return_value_2["rot"] = [180,0,0]
+        return_value_2["objects"] = components_second
+        
+        #thing["components"].append(return_value_2)
+
+    
+        #add slice # top
+        p3 = copy.deepcopy(kwargs)
+        p3["type"] = "n"
+        p3["shape"] = f"oobb_slice"
+        p3["rot"] = [0,0,-45]
+        #p3["m"] = "#"
+        oobb_base.append_full(thing,**p3)
+
+def get_shelf_version_2(thing, **kwargs):
+
+    width = kwargs.get("width", 9)
+    width_mm = (width * 15) -1
+    height = kwargs.get("height", 9)
+    height_mm = (height * 15) -1
+    depth = kwargs.get("thickness", 4)
+    extra = kwargs.get("extra", "")
+    #split extra by _ grab the string before _mm_depth_shelf
+    if "depth_shelf" in extra:
+        depth_shelf = extra.split("_mm_depth_shelf")[0]
+        depth_shelf = float(depth_shelf.split("_")[-1])
+    else:
+        depth_shelf = 0
+    #last underscore split string is depth
+    
+    prepare_print = kwargs.get("prepare_print", False)
+
+    pos = kwargs.get("pos", [0, 0, 0])
+    rot = kwargs.get("rot", [0, 0, 0])
+    #pos = copy.deepcopy(pos)
+    #pos[2] += -20
+
+
+    #add plate 
+    if True:
+        #long plate width
+        p3 = copy.deepcopy(kwargs)
+        p3["type"] = "p"
+        p3["shape"] = f"oobb_cube"    
+        wid = width*15 - 1
+        hei = height*15 - 1
+        dep = depth
+        size = [wid, hei, dep]
+        p3["size"] = size
+        pos1 = copy.deepcopy(pos)
+        pos1[2] = -depth/2
+        p3["pos"] = pos1
+        oobb_base.append_full(thing,**p3)
+        
+
+    
+    
+    #add countersunk screws
+    if True:
+        dep = 16 + 5
+        shift_nut = 12
+        
+
+        if True:
+            shap = f"oobb_screw_countersunk"
+            #rad_name = "m3d5_screw_wood"
+            rad_name = "m3"
+            hole_extra = 0        
+            p3 = copy.deepcopy(kwargs)
+            p3["type"] = "n"
+            p3["shape"] = shap
+            p3["depth"] = dep
+            p3["radius_name"] = rad_name
+            p3["m"] = "#"
+            pos1 = copy.deepcopy(pos)
+            pos1[2] += 0
+            p3["pos"] = pos1
+            rot1 = copy.deepcopy(rot)
+            rot1[1] += 90
+            rot1[2] += -90
+            p3["rot"] = rot1
+
+            p3_nut = copy.deepcopy(kwargs)
+            p3_nut["type"] = "n"
+            p3_nut["shape"] = f"oobb_nut"
+            #p3_nut["depth"] = dep
+            p3_nut["radius_name"] = "m3"
+            p3_nut["m"] = "#"
+            pos1 = copy.deepcopy(pos)
+            pos1[2] += 0
+            p3_nut["pos"] = pos1
+            rot1 = copy.deepcopy(rot)
+            rot1[0] += 90
+            rot1[1] += 90
+            p3_nut["rot"] = rot1
+
+
+            #side screws
+            if True:
+                poss = []
+                pos_deets = {}
+                pos_deets["shift_width_screw"] = -width_mm/2 + 15
+                pos_deets["shift_height_screw"] = -height_mm/2 - 5
+                pos_deets["rot_screw"] = [0,0,0]
+                pos_deets["shift_width_nut"] = -width_mm/2 + 15
+                pos_deets["shift_height_nut"] = -height_mm/2 + shift_nut                
+                poss.append(pos_deets)
+
+                pos_deets = {}
+                pos_deets["shift_width_screw"] = width_mm/2 - 15
+                pos_deets["shift_height_screw"] = -height_mm/2 - 5
+                pos_deets["rot_screw"] = [0,0,0]
+                pos_deets["shift_width_nut"] = width_mm/2 - 15
+                pos_deets["shift_height_nut"] = -height_mm/2 + shift_nut
+                poss.append(pos_deets)
+
+                pos_deets = {}
+                pos_deets["shift_width_screw"] = width_mm/2 - 15
+                pos_deets["shift_height_screw"] = height_mm/2 + 5
+                pos_deets["rot_screw"] = [0,0,180]
+                pos_deets["shift_width_nut"] = width_mm/2 - 15
+                pos_deets["shift_height_nut"] = height_mm/2 - shift_nut
+                poss.append(pos_deets)
+
+                pos_deets = {}
+                pos_deets["shift_width_screw"] = -width_mm/2 + 15
+                pos_deets["shift_height_screw"] = height_mm/2 + 5
+                pos_deets["rot_screw"] = [0,0,180]
+                pos_deets["shift_width_nut"] = -width_mm/2 + 15
+                pos_deets["shift_height_nut"] = height_mm/2 - shift_nut
+                poss.append(pos_deets)
+
+                for pos_deets in poss:
+                    p4 = copy.deepcopy(p3)
+                    pos1 = copy.deepcopy(p3["pos"])
+                    pos1[0] += pos_deets["shift_width_screw"]
+                    pos1[1] += pos_deets["shift_height_screw"]
+                    pos1[2] += 0#25
+                    p4["pos"] = pos1
+                    rot = copy.deepcopy(p3["rot"])
+                    rot_screw = pos_deets["rot_screw"]
+                    rot[0] += rot_screw[0]
+                    rot[1] += rot_screw[1]
+                    rot[2] += rot_screw[2]
+                    p4["rot"] = rot
+                    oobb_base.append_full(thing,**p4)
+
+                    p4_nut = copy.deepcopy(p3_nut)
+                    pos1 = copy.deepcopy(p3_nut["pos"])
+                    pos1[0] = pos_deets["shift_width_nut"]
+                    pos1[1] = pos_deets["shift_height_nut"]
+                    pos1[2] += 0#25
+                    p4_nut["pos"] = pos1
+                    offset_nut = 3
+                    repeats = 6
+                    for i in range(repeats):
+                        p5 = copy.deepcopy(p4_nut)
+                        pos1 = copy.deepcopy(p4_nut["pos"])
+                        pos1[2] += i * offset_nut
+                        p5["pos"] = pos1
+                        oobb_base.append_full(thing,**p5)
+
         
 
 
