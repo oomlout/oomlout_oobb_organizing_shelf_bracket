@@ -848,7 +848,7 @@ def get_shelf_version_2(thing, **kwargs):
                 pos_deets["shift_width_screw"] = -(width - 3)/2 * 15#-width_mm/2 + 15
                 pos_deets["shift_height_screw"] = -height_mm/2 - 5
                 pos_deets["rot_screw"] = [0,0,0]
-                pos_deets["shift_width_nut"] = -(width_mm-3)/2 + 15
+                pos_deets["shift_width_nut"] = pos_deets["shift_width_screw"]
                 pos_deets["shift_height_nut"] = -height_mm/2 + shift_nut                
                 poss.append(pos_deets)
 
@@ -856,7 +856,7 @@ def get_shelf_version_2(thing, **kwargs):
                 pos_deets["shift_width_screw"] = (width - 3)/2 * 15#-width_mm/2 + 15
                 pos_deets["shift_height_screw"] = -height_mm/2 - 5
                 pos_deets["rot_screw"] = [0,0,0]
-                pos_deets["shift_width_nut"] = (width_mm-3)/2 - 15
+                pos_deets["shift_width_nut"] = pos_deets["shift_width_screw"]
                 pos_deets["shift_height_nut"] = -height_mm/2 + shift_nut
                 poss.append(pos_deets)
 
@@ -864,7 +864,7 @@ def get_shelf_version_2(thing, **kwargs):
                 pos_deets["shift_width_screw"] = (width - 3)/2 * 15#-width_mm/2 + 15
                 pos_deets["shift_height_screw"] = height_mm/2 + 5
                 pos_deets["rot_screw"] = [0,0,180]
-                pos_deets["shift_width_nut"] = (width_mm-3)/2 - 15
+                pos_deets["shift_width_nut"] = pos_deets["shift_width_screw"]
                 pos_deets["shift_height_nut"] = height_mm/2 - shift_nut
                 poss.append(pos_deets)
 
@@ -872,7 +872,7 @@ def get_shelf_version_2(thing, **kwargs):
                 pos_deets["shift_width_screw"] = -(width - 3)/2 * 15#-width_mm/2 + 15
                 pos_deets["shift_height_screw"] = height_mm/2 + 5
                 pos_deets["rot_screw"] = [0,0,180]
-                pos_deets["shift_width_nut"] = -(width_mm-3)/2 + 15
+                pos_deets["shift_width_nut"] = pos_deets["shift_width_screw"]
                 pos_deets["shift_height_nut"] = height_mm/2 - shift_nut
                 poss.append(pos_deets)
 

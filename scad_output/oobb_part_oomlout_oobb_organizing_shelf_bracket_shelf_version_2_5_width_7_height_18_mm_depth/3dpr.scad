@@ -29,7 +29,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, -42.0000000000, 0]) {
+		translate(v = [-15.0000000000, -42.0000000000, 0]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -41,7 +41,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, -42.0000000000, 3]) {
+		translate(v = [-15.0000000000, -42.0000000000, 3]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -53,7 +53,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, -42.0000000000, 6]) {
+		translate(v = [-15.0000000000, -42.0000000000, 6]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -65,7 +65,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, -42.0000000000, 9]) {
+		translate(v = [-15.0000000000, -42.0000000000, 9]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -77,7 +77,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, -42.0000000000, 12]) {
+		translate(v = [-15.0000000000, -42.0000000000, 12]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -89,7 +89,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, -42.0000000000, 15]) {
+		translate(v = [-15.0000000000, -42.0000000000, 15]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -122,7 +122,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, -42.0000000000, 0]) {
+		translate(v = [15.0000000000, -42.0000000000, 0]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -134,7 +134,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, -42.0000000000, 3]) {
+		translate(v = [15.0000000000, -42.0000000000, 3]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -146,7 +146,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, -42.0000000000, 6]) {
+		translate(v = [15.0000000000, -42.0000000000, 6]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -158,7 +158,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, -42.0000000000, 9]) {
+		translate(v = [15.0000000000, -42.0000000000, 9]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -170,7 +170,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, -42.0000000000, 12]) {
+		translate(v = [15.0000000000, -42.0000000000, 12]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -182,7 +182,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, -42.0000000000, 15]) {
+		translate(v = [15.0000000000, -42.0000000000, 15]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -215,7 +215,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, 42.0000000000, 0]) {
+		translate(v = [15.0000000000, 42.0000000000, 0]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -227,7 +227,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, 42.0000000000, 3]) {
+		translate(v = [15.0000000000, 42.0000000000, 3]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -239,7 +239,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, 42.0000000000, 6]) {
+		translate(v = [15.0000000000, 42.0000000000, 6]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -251,7 +251,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, 42.0000000000, 9]) {
+		translate(v = [15.0000000000, 42.0000000000, 9]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -263,7 +263,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, 42.0000000000, 12]) {
+		translate(v = [15.0000000000, 42.0000000000, 12]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -275,7 +275,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [20.5000000000, 42.0000000000, 15]) {
+		translate(v = [15.0000000000, 42.0000000000, 15]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -308,7 +308,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, 42.0000000000, 0]) {
+		translate(v = [-15.0000000000, 42.0000000000, 0]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -320,7 +320,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, 42.0000000000, 3]) {
+		translate(v = [-15.0000000000, 42.0000000000, 3]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -332,7 +332,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, 42.0000000000, 6]) {
+		translate(v = [-15.0000000000, 42.0000000000, 6]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -344,7 +344,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, 42.0000000000, 9]) {
+		translate(v = [-15.0000000000, 42.0000000000, 9]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -356,7 +356,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, 42.0000000000, 12]) {
+		translate(v = [-15.0000000000, 42.0000000000, 12]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
@@ -368,7 +368,7 @@ difference() {
 				}
 			}
 		}
-		translate(v = [-20.5000000000, 42.0000000000, 15]) {
+		translate(v = [-15.0000000000, 42.0000000000, 15]) {
 			rotate(a = [90, 90, 0]) {
 				difference() {
 					union() {
