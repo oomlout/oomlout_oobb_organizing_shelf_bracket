@@ -13,7 +13,7 @@ def make_scad(**kwargs):
     # save_type variables
     if True:
         filter = ""
-        filter = "shelf_version_2"
+        #filter = "shelf_version_2"
 
         navigation = True
 
@@ -53,33 +53,40 @@ def make_scad(**kwargs):
         
         parts.append(part)
 
+        screw_diameters = ["m3_5", "m5", "m6"]
 
-        extras = []
+        extras = []        
         extras.append("attach_left_side_18_mm_depth_shelf")
         extras.append("attach_right_side_18_mm_depth_shelf")
         extras.append("")
 
         #version 2
-        for extra in extras:
-            part = copy.deepcopy(part_default)
-            p3 = copy.deepcopy(kwargs)
-            p3["width"] = 10
-            p3["height"] = 5
-            p3["thickness"] = 14
-            p3["extra"] = extra
-            part["kwargs"] = p3
-            part["name"] = "shelf_bracket_version_2"            
-            parts.append(part)
+        for screw_diameter in screw_diameters:
+            for extra in extras:
+                part = copy.deepcopy(part_default)
+                p3 = copy.deepcopy(kwargs)
+                p3["width"] = 10
+                p3["height"] = 5
+                p3["thickness"] = 14
+                ex = extra
+                ex += f"_{screw_diameter}_screw_diameter"
+                p3["extra"] = ex
+                p3["screw_diameter"] = screw_diameter
+                part["kwargs"] = p3
+                part["name"] = "shelf_bracket_version_2"            
+                parts.append(part)
 
-            part = copy.deepcopy(part_default)
-            p3 = copy.deepcopy(kwargs)
-            p3["width"] = 5
-            p3["height"] = 3
-            p3["thickness"] = 14
-            p3["extra"] = extra
-            part["kwargs"] = p3
-            part["name"] = "shelf_bracket_version_2"
-            parts.append(part)
+                part = copy.deepcopy(part_default)
+                p3 = copy.deepcopy(kwargs)
+                p3["width"] = 5
+                p3["height"] = 3
+                p3["thickness"] = 14
+                ex = extra
+                ex += f"_{screw_diameter}_screw_diameter"
+                p3["extra"] = ex
+                part["kwargs"] = p3
+                part["name"] = "shelf_bracket_version_2"
+                parts.append(part)
 
         #shelf tops        
         part = copy.deepcopy(part_default)
@@ -120,10 +127,13 @@ def make_scad(**kwargs):
 
 def get_base(thing, **kwargs):
 
+
     width = kwargs.get("width", 9)
     height = kwargs.get("height", 9)
     depth = kwargs.get("thickness", 4)
     prepare_print = kwargs.get("prepare_print", True)
+
+    screw_diameter = kwargs.get("screw_diameter", "m3_5")
 
     pos = kwargs.get("pos", [0, 0, 0])
     #pos = copy.deepcopy(pos)
@@ -205,7 +215,7 @@ def get_base(thing, **kwargs):
         p3["type"] = "n"
         p3["shape"] = f"oobb_screw_countersunk"
         p3["depth"] = dep
-        p3["radius_name"] = "m3d5_screw_wood"
+        p3["radius_name"] = screw_diameter
         p3["m"] = "#"
         p3["clearance"] = "top"
         pos1 = copy.deepcopy(pos)
@@ -227,7 +237,7 @@ def get_base(thing, **kwargs):
         p3["type"] = "n"
         p3["shape"] = f"oobb_screw_countersunk"
         p3["depth"] = dep
-        p3["radius_name"] = "m3d5_screw_wood"
+        p3["radius_name"] = "screw_diameter"
         p3["m"] = "#"
         p3["clearance"] = "top"
         pos1 = copy.deepcopy(pos)
@@ -987,7 +997,19 @@ def make_scad_generic(part):
             start = 1.5 - (layers / 2)*3
         if "bunting" in thing:
             start = 0.5
+        
+
+        
         opsc.opsc_make_object(f'scad_output/{thing["id"]}/{mode}.scad', thing["components"], mode=mode, save_type=save_type, overwrite=overwrite, layers=layers, tilediff=tilediff, start=start)    
+
+
+
+    #export kwargs in working.yaml
+    import yaml
+    working_yaml = "working.yaml"
+    with open(working_yaml, 'w') as file:
+        yaml.dump(kwargs, file)
+    
 
 
 if __name__ == '__main__':
