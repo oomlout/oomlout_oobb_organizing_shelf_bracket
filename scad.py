@@ -53,7 +53,7 @@ def make_scad(**kwargs):
         
         parts.append(part)
 
-        screw_diameters = ["m3_5", "m5", "m6"]
+        screw_diameters = ["m3", "m5_screw_wood"]
 
         extras = []        
         extras.append("attach_left_side_18_mm_depth_shelf")
@@ -81,6 +81,7 @@ def make_scad(**kwargs):
                 p3["width"] = 5
                 p3["height"] = 3
                 p3["thickness"] = 14
+                p3["screw_diameter"] = screw_diameter
                 ex = extra
                 ex += f"_{screw_diameter}_screw_diameter"
                 p3["extra"] = ex
@@ -127,6 +128,7 @@ def make_scad(**kwargs):
 
 def get_base(thing, **kwargs):
 
+    #### not the main one anymore
 
     width = kwargs.get("width", 9)
     height = kwargs.get("height", 9)
@@ -475,6 +477,7 @@ def get_shelf_bracket_version_2(thing, **kwargs):
     height = kwargs.get("height", 9)
     depth = kwargs.get("thickness", 4)
     extra = kwargs.get("extra", "")
+    screw_diameter = kwargs.get("screw_diameter", "m3")
     #split extra by _ grab the string before _mm_depth_shelf
     if "depth_shelf" in extra:
         depth_shelf = extra.split("_mm_depth_shelf")[0]
@@ -653,7 +656,7 @@ def get_shelf_bracket_version_2(thing, **kwargs):
             p3["shape"] = f"oobb_screw_countersunk"
             p3["depth"] = dep
             #p3["radius_name"] = "m3d5_screw_wood"
-            p3["radius_name"] = "m3_screw_wood"
+            p3["radius_name"] = screw_diameter
             p3["m"] = "#"
             p3["clearance"] = "top"
             pos1 = copy.deepcopy(pos)
@@ -676,8 +679,8 @@ def get_shelf_bracket_version_2(thing, **kwargs):
 
         if True:
             shap = f"oobb_screw_countersunk"
-            #rad_name = "m3d5_screw_wood"
-            rad_name = "m3_screw_wood"
+            rad_name = "m3d5_screw_wood"
+            #rad_name = screw_diameter
             hole_extra = 0        
             p3 = copy.deepcopy(kwargs)
             p3["type"] = "n"
