@@ -1,0 +1,21 @@
+| id | short_code | name | classification | type | size | color | description_main | description_extra | manufacturer | part_number |
+|---|---|---|---|---|---|---|---|---|---|---|
+| hardware_nut_m3 | nu3 | Hardware Nut M3 | hardware | nut | m3 |  |  |  |  |  |
+| hardware_screw_countersunk_m3_black_10_mm_length_hex_head | cs3b10h | Hardware Screw Countersunk M3 Black 10 mm Length Hex Head | hardware | screw_countersunk | m3 | black | 10_mm_length | hex_head |  |  |
+| hardware_screw_countersunk_m3_black_12_mm_length_hex_head | cs3b12h | Hardware Screw Countersunk M3 Black 12 mm Length Hex Head | hardware | screw_countersunk | m3 | black | 12_mm_length | hex_head |  |  |
+| hardware_screw_countersunk_m3_black_16_mm_length_hex_head | cs3b16h | Hardware Screw Countersunk M3 Black 16 mm Length Hex Head | hardware | screw_countersunk | m3 | black | 16_mm_length | hex_head |  |  |
+| hardware_screw_countersunk_m3_black_20_mm_length_hex_head | cs3b20h | Hardware Screw Countersunk M3 Black 20 mm Length Hex Head | hardware | screw_countersunk | m3 | black | 20_mm_length | hex_head |  |  |
+| hardware_screw_countersunk_m3_black_25_mm_length_hex_head | cs3b25h | Hardware Screw Countersunk M3 Black 25 mm Length Hex Head | hardware | screw_countersunk | m3 | black | 25_mm_length | hex_head |  |  |
+| hardware_screw_countersunk_m3_black_6_mm_length_hex_head | cs3b6h | Hardware Screw Countersunk M3 Black 6 mm Length Hex Head | hardware | screw_countersunk | m3 | black | 6_mm_length | hex_head |  |  |
+| hardware_screw_countersunk_m3_black_8_mm_length_hex_head | cs3b8h | Hardware Screw Countersunk M3 Black 8 mm Length Hex Head | hardware | screw_countersunk | m3 | black | 8_mm_length | hex_head |  |  |
+| hardware_screw_socket_cap_m3_black_10_mm_length_hex_head | sc3b10h | Hardware Screw Socket Cap M3 Black 10 mm Length Hex Head | hardware | screw_socket_cap | m3 | black | 10_mm_length | hex_head |  |  |
+| hardware_screw_socket_cap_m3_black_12_mm_length_hex_head | sc3b12h | Hardware Screw Socket Cap M3 Black 12 mm Length Hex Head | hardware | screw_socket_cap | m3 | black | 12_mm_length | hex_head |  |  |
+| hardware_screw_socket_cap_m3_black_16_mm_length_hex_head | sc3b16h | Hardware Screw Socket Cap M3 Black 16 mm Length Hex Head | hardware | screw_socket_cap | m3 | black | 16_mm_length | hex_head |  |  |
+| hardware_screw_socket_cap_m3_black_20_mm_length_hex_head | sc3b20h | Hardware Screw Socket Cap M3 Black 20 mm Length Hex Head | hardware | screw_socket_cap | m3 | black | 20_mm_length | hex_head |  |  |
+| hardware_screw_socket_cap_m3_black_25_mm_length_hex_head | sc3b25h | Hardware Screw Socket Cap M3 Black 25 mm Length Hex Head | hardware | screw_socket_cap | m3 | black | 25_mm_length | hex_head |  |  |
+| hardware_screw_socket_cap_m3_black_30_mm_length_hex_head | sc3b30h | Hardware Screw Socket Cap M3 Black 30 mm Length Hex Head | hardware | screw_socket_cap | m3 | black | 30_mm_length | hex_head |  |  |
+| hardware_screw_socket_cap_m3_black_35_mm_length_hex_head | sc3b35h | Hardware Screw Socket Cap M3 Black 35 mm Length Hex Head | hardware | screw_socket_cap | m3 | black | 35_mm_length | hex_head |  |  |
+| hardware_screw_socket_cap_m3_black_6_mm_length_hex_head | sc3b6h | Hardware Screw Socket Cap M3 Black 6 mm Length Hex Head | hardware | screw_socket_cap | m3 | black | 6_mm_length | hex_head |  |  |
+| hardware_screw_socket_cap_m3_black_8_mm_length_hex_head | sc3b8h | Hardware Screw Socket Cap M3 Black 8 mm Length Hex Head | hardware | screw_socket_cap | m3 | black | 8_mm_length | hex_head |  |  |
+| hardware_washer_m3 | w3 | Hardware Washer M3 | hardware | washer | m3 |  |  |  |  |  |
+

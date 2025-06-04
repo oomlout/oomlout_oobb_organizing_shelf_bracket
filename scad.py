@@ -2,6 +2,7 @@ import copy
 import opsc
 import oobb
 import oobb_base
+import scad_help
 
 def main(**kwargs):
     make_scad(**kwargs)
@@ -13,6 +14,8 @@ def make_scad(**kwargs):
     if True:
         filter = ""
         filter = "shelf_version_2"
+
+        navigation = True
 
         #kwargs["save_type"] = "none"
         kwargs["save_type"] = "all"
@@ -103,6 +106,17 @@ def make_scad(**kwargs):
                 print(f"done {part['name']}")
             else:
                 print(f"skipping {part['name']}")
+
+    #generate navigation
+    if navigation:
+        sort = []
+        #sort.append("extra")
+        sort.append("name")
+        sort.append("width")
+        sort.append("height")
+        sort.append("thickness")
+        
+        scad_help.generate_navigation(sort = sort)
 
 def get_base(thing, **kwargs):
 
