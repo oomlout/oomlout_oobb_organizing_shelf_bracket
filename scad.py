@@ -17,7 +17,7 @@ def make_scad(**kwargs):
 
         navigation = True
 
-        #kwargs["save_type"] = "none"
+        #kwargs["save_type"] = "none"        
         kwargs["save_type"] = "all"
         
         kwargs["overwrite"] = True
@@ -54,6 +54,7 @@ def make_scad(**kwargs):
         parts.append(part)
 
         screw_diameters = ["m3", "m5_screw_wood"]
+        attachment_styles = [""]
 
         extras = []        
         extras.append("attach_left_side_18_mm_depth_shelf")
@@ -63,31 +64,81 @@ def make_scad(**kwargs):
         #version 2
         for screw_diameter in screw_diameters:
             for extra in extras:
-                part = copy.deepcopy(part_default)
-                p3 = copy.deepcopy(kwargs)
-                p3["width"] = 10
-                p3["height"] = 5
-                p3["thickness"] = 14
-                ex = extra
-                ex += f"_{screw_diameter}_screw_diameter"
-                p3["extra"] = ex
-                p3["screw_diameter"] = screw_diameter
-                part["kwargs"] = p3
-                part["name"] = "shelf_bracket_version_2"            
-                parts.append(part)
+                for attachment_style in attachment_styles:                    
+                    part = copy.deepcopy(part_default)
+                    p3 = copy.deepcopy(kwargs)
+                    p3["width"] = 10
+                    p3["height"] = 5
+                    p3["thickness"] = 14
+                    p3["attachment_style"] = attachment_style
+                    ex = extra
+                    ex += f"_{screw_diameter}_screw_diameter"
+                    if attachment_style != "":
+                        ex+= f"_{attachment_style}_attachment_style"
+                    p3["extra"] = ex
+                    p3["screw_diameter"] = screw_diameter
+                    part["kwargs"] = p3
+                    part["name"] = "shelf_bracket_version_2"            
+                    if attachment_style == "m6_bolt" and extra != "":
+                        #skip sides for m6 style
+                        pass
+                    else:
+                        parts.append(part)
 
-                part = copy.deepcopy(part_default)
-                p3 = copy.deepcopy(kwargs)
-                p3["width"] = 5
-                p3["height"] = 3
-                p3["thickness"] = 14
-                p3["screw_diameter"] = screw_diameter
-                ex = extra
-                ex += f"_{screw_diameter}_screw_diameter"
-                p3["extra"] = ex
-                part["kwargs"] = p3
-                part["name"] = "shelf_bracket_version_2"
-                parts.append(part)
+                    part = copy.deepcopy(part_default)
+                    p3 = copy.deepcopy(kwargs)
+                    p3["width"] = 5
+                    p3["height"] = 3
+                    p3["thickness"] = 14
+                    p3["screw_diameter"] = screw_diameter
+                    ex = extra
+                    ex += f"_{screw_diameter}_screw_diameter"
+                    p3["extra"] = ex
+                    part["kwargs"] = p3
+                    part["name"] = "shelf_bracket_version_2"
+                    parts.append(part)
+
+        #obb bracket
+        screw_diameters = ["m3", "m5_screw_wood"]
+        attachment_styles = ["m6_bolt"]
+
+        extras = []        
+        extras.append("")
+        for screw_diameter in screw_diameters:
+            for extra in extras:
+                for attachment_style in attachment_styles:                    
+                    part = copy.deepcopy(part_default)
+                    p3 = copy.deepcopy(kwargs)
+                    p3["width"] = 10
+                    p3["height"] = 5
+                    p3["thickness"] = 14
+                    p3["attachment_style"] = attachment_style
+                    ex = extra
+                    ex += f"_{screw_diameter}_screw_diameter"
+                    if attachment_style != "":
+                        ex+= f"_{attachment_style}_attachment_style"
+                    p3["extra"] = ex
+                    p3["screw_diameter"] = screw_diameter
+                    part["kwargs"] = p3
+                    part["name"] = "shelf_bracket_version_2"            
+                    if attachment_style == "m6_bolt" and extra != "":
+                        #skip sides for m6 style
+                        pass
+                    else:
+                        parts.append(part)
+
+                    part = copy.deepcopy(part_default)
+                    p3 = copy.deepcopy(kwargs)
+                    p3["width"] = 5
+                    p3["height"] = 3
+                    p3["thickness"] = 21
+                    p3["screw_diameter"] = screw_diameter
+                    ex = extra
+                    ex += f"_{screw_diameter}_screw_diameter"
+                    p3["extra"] = ex
+                    part["kwargs"] = p3
+                    part["name"] = "shelf_bracket_version_2"
+                    parts.append(part)
 
         #shelf tops        
         part = copy.deepcopy(part_default)
@@ -136,6 +187,13 @@ def get_base(thing, **kwargs):
     prepare_print = kwargs.get("prepare_print", True)
 
     screw_diameter = kwargs.get("screw_diameter", "m3_5")
+    screw_shape = "oobb_screw_countersunk"
+    if "bolt" in screw_diameter:
+        screw_shape = "oobb_bolt"
+        screw_diameter = screw_diameter.replace("_bolt", "")
+    kwargs["screw_diameter"] = screw_diameter
+    kwargs["screw_shape"] = screw_shape
+
 
     pos = kwargs.get("pos", [0, 0, 0])
     #pos = copy.deepcopy(pos)
@@ -215,7 +273,8 @@ def get_base(thing, **kwargs):
         dep = 15
         p3 = copy.deepcopy(kwargs)
         p3["type"] = "n"
-        p3["shape"] = f"oobb_screw_countersunk"
+        #p3["shape"] = f"oobb_screw_countersunk"
+        p3["shape"] = screw_shape
         p3["depth"] = dep
         p3["radius_name"] = screw_diameter
         p3["m"] = "#"
@@ -237,7 +296,8 @@ def get_base(thing, **kwargs):
 
         p3 = copy.deepcopy(kwargs)
         p3["type"] = "n"
-        p3["shape"] = f"oobb_screw_countersunk"
+        #p3["shape"] = f"oobb_screw_countersunk"
+        p3["shape"] = screw_shape
         p3["depth"] = dep
         p3["radius_name"] = "screw_diameter"
         p3["m"] = "#"
@@ -485,6 +545,8 @@ def get_shelf_bracket_version_2(thing, **kwargs):
     else:
         depth_shelf = 0
     #last underscore split string is depth
+    screw_diameter = kwargs.get("screw_diameter", "m3_5")
+    attachment_style = kwargs.get("attachment_style", "")
     
     prepare_print = kwargs.get("prepare_print", False)
 
@@ -680,12 +742,17 @@ def get_shelf_bracket_version_2(thing, **kwargs):
         if True:
             shap = f"oobb_screw_countersunk"
             rad_name = "m3d5_screw_wood"
+            if attachment_style == "m6_bolt":
+                shap = f"oobb_hole"
+                rad_name = "m6"
             #rad_name = screw_diameter
             hole_extra = 0        
             p3 = copy.deepcopy(kwargs)
             p3["type"] = "n"
             p3["shape"] = shap
             p3["depth"] = dep
+            if shap == "oobb_hole":
+                p3["depth"] = 30
             p3["radius_name"] = rad_name
             p3["m"] = "#"
             p3["clearance"] = "top"
@@ -695,6 +762,11 @@ def get_shelf_bracket_version_2(thing, **kwargs):
             pos1[1] += shift_horizontal
             #pos1[0] += 15 * (height - 1)/2 - 15
             pos1[0] += 15 * (width-3)/2
+            if shap == "oobb_hole":
+                pos1[0] += -60
+            
+            if shap == "oobb_hole":
+                pos1[1] += dep
             pos1[2] += depth/2
             p3["pos"] = pos1
             rot1 = copy.deepcopy(rot)
@@ -724,6 +796,8 @@ def get_shelf_bracket_version_2(thing, **kwargs):
             p3 = copy.deepcopy(p3)
             pos1 = copy.deepcopy(p3["pos"])
             pos1[0] = pos1[0] - (width-3) * 15
+            if shap == "oobb_hole":
+                pos1[0] += 60
             p3["pos"] = pos1
             if "side" not in extra:
                 oobb_base.append_full(thing,**p3)
