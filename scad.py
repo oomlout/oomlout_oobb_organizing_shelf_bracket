@@ -752,7 +752,7 @@ def get_shelf_bracket_version_2(thing, **kwargs):
             p3["shape"] = shap
             p3["depth"] = dep
             if shap == "oobb_hole":
-                p3["depth"] = 30
+                p3["depth"] = 20
             p3["radius_name"] = rad_name
             p3["m"] = "#"
             p3["clearance"] = "top"
@@ -776,6 +776,17 @@ def get_shelf_bracket_version_2(thing, **kwargs):
             #rot = [0,90,-90]
             if "side" not in extra:
                 oobb_base.append_full(thing,**p3)
+                #add loads more for oobb m6 version
+                if shap == "oobb_hole" and attachment_style == "m6_bolt":
+                    #add the other side
+                    shifts  =[15,-15,-30]
+                    for shift in shifts:
+                        p4 = copy.deepcopy(p3)
+                        pos1 = copy.deepcopy(p3["pos"])
+                        pos1[0] += shift
+                        p4["pos"] = pos1
+                        oobb_base.append_full(thing,**p4)
+                
             shift_vertical = 14 + depth_shelf/2
             shift_z = depth/2
             if "side" in extra:
