@@ -18,7 +18,7 @@ def make_scad(**kwargs):
         navigation = True
 
         #kwargs["save_type"] = "none"        
-        kwargs["save_type"] = "all"
+        #kwargs["save_type"] = "all"
         
         kwargs["overwrite"] = True
         
@@ -102,43 +102,41 @@ def make_scad(**kwargs):
         screw_diameters = ["m3", "m5_screw_wood"]
         attachment_styles = ["m6_bolt"]
 
+        sizes = []
+        sizes.append([10, 5,14])
+        sizes.append([11, 5,14])
+        sizes.append([5, 3,21])
+
         extras = []        
         extras.append("")
-        for screw_diameter in screw_diameters:
-            for extra in extras:
-                for attachment_style in attachment_styles:                    
-                    part = copy.deepcopy(part_default)
-                    p3 = copy.deepcopy(kwargs)
-                    p3["width"] = 10
-                    p3["height"] = 5
-                    p3["thickness"] = 14
-                    p3["attachment_style"] = attachment_style
-                    ex = extra
-                    ex += f"_{screw_diameter}_screw_diameter"
-                    if attachment_style != "":
-                        ex+= f"_{attachment_style}_attachment_style"
-                    p3["extra"] = ex
-                    p3["screw_diameter"] = screw_diameter
-                    part["kwargs"] = p3
-                    part["name"] = "shelf_bracket_version_2"            
-                    if attachment_style == "m6_bolt" and extra != "":
-                        #skip sides for m6 style
-                        pass
-                    else:
-                        parts.append(part)
+        for siz in sizes:
+            for screw_diameter in screw_diameters:
+                for extra in extras:
+                    for attachment_style in attachment_styles:                    
+                        wid = siz[0]
+                        hei = siz[1]
+                        dep = siz[2]
+                        part = copy.deepcopy(part_default)
+                        p3 = copy.deepcopy(kwargs)
+                        p3["width"] = wid
+                        p3["height"] = hei
+                        p3["thickness"] = dep
+                        p3["attachment_style"] = attachment_style
+                        ex = extra
+                        ex += f"_{screw_diameter}_screw_diameter"
+                        if attachment_style != "":
+                            ex+= f"_{attachment_style}_attachment_style"
+                        p3["extra"] = ex
+                        p3["screw_diameter"] = screw_diameter
+                        part["kwargs"] = p3
+                        part["name"] = "shelf_bracket_version_2"            
+                        if attachment_style == "m6_bolt" and extra != "":
+                            #skip sides for m6 style
+                            pass
+                        else:
+                            parts.append(part)
 
-                    part = copy.deepcopy(part_default)
-                    p3 = copy.deepcopy(kwargs)
-                    p3["width"] = 5
-                    p3["height"] = 3
-                    p3["thickness"] = 21
-                    p3["screw_diameter"] = screw_diameter
-                    ex = extra
-                    ex += f"_{screw_diameter}_screw_diameter"
-                    p3["extra"] = ex
-                    part["kwargs"] = p3
-                    part["name"] = "shelf_bracket_version_2"
-                    parts.append(part)
+                        
 
         #shelf tops        
         part = copy.deepcopy(part_default)
@@ -780,8 +778,16 @@ def get_shelf_bracket_version_2(thing, **kwargs):
                 if shap == "oobb_hole" and attachment_style == "m6_bolt":
                     #add the other side
                     shifts  =[15,-15,-30]
+
+                    if width == 11:
+                        shifts.append(-45)
+                        shifts.append(75)
+                        shifts.append(60)
+                        shifts.append(45)
+                        shifts.append(30)
                     for shift in shifts:
                         p4 = copy.deepcopy(p3)
+                        p4["depth"] += -4
                         pos1 = copy.deepcopy(p3["pos"])
                         pos1[0] += shift
                         p4["pos"] = pos1
@@ -1102,4 +1108,5 @@ def make_scad_generic(part):
 
 if __name__ == '__main__':
     kwargs = {}
+    kwargs["save_type"] = "none"
     main(**kwargs)

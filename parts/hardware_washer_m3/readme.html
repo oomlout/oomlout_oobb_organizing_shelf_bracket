@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hardware_washer_m3 - OOMLout Part</title>
+<!-- Classless CSS = modern look without touching your HTML -->
+<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: #666666; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #666666; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f0f0f0; }
+.codehilite .c { color: #60a0b0; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #FF0000 } /* Error */
+.codehilite .k { color: #007020; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666666 } /* Operator */
+.codehilite .ch { color: #60a0b0; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #007020 } /* Comment.Preproc */
+.codehilite .cpf { color: #60a0b0; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #FF0000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #00A000 } /* Generic.Inserted */
+.codehilite .go { color: #888888 } /* Generic.Output */
+.codehilite .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #0044DD } /* Generic.Traceback */
+.codehilite .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #007020 } /* Keyword.Pseudo */
+.codehilite .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #902000 } /* Keyword.Type */
+.codehilite .m { color: #40a070 } /* Literal.Number */
+.codehilite .s { color: #4070a0 } /* Literal.String */
+.codehilite .na { color: #4070a0 } /* Name.Attribute */
+.codehilite .nb { color: #007020 } /* Name.Builtin */
+.codehilite .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #60add5 } /* Name.Constant */
+.codehilite .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.codehilite .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #007020 } /* Name.Exception */
+.codehilite .nf { color: #06287e } /* Name.Function */
+.codehilite .nl { color: #002070; font-weight: bold } /* Name.Label */
+.codehilite .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #bb60d5 } /* Name.Variable */
+.codehilite .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #bbbbbb } /* Text.Whitespace */
+.codehilite .mb { color: #40a070 } /* Literal.Number.Bin */
+.codehilite .mf { color: #40a070 } /* Literal.Number.Float */
+.codehilite .mh { color: #40a070 } /* Literal.Number.Hex */
+.codehilite .mi { color: #40a070 } /* Literal.Number.Integer */
+.codehilite .mo { color: #40a070 } /* Literal.Number.Oct */
+.codehilite .sa { color: #4070a0 } /* Literal.String.Affix */
+.codehilite .sb { color: #4070a0 } /* Literal.String.Backtick */
+.codehilite .sc { color: #4070a0 } /* Literal.String.Char */
+.codehilite .dl { color: #4070a0 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #4070a0 } /* Literal.String.Double */
+.codehilite .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.codehilite .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.codehilite .sx { color: #c65d09 } /* Literal.String.Other */
+.codehilite .sr { color: #235388 } /* Literal.String.Regex */
+.codehilite .s1 { color: #4070a0 } /* Literal.String.Single */
+.codehilite .ss { color: #517918 } /* Literal.String.Symbol */
+.codehilite .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #06287e } /* Name.Function.Magic */
+.codehilite .vc { color: #bb60d5 } /* Name.Variable.Class */
+.codehilite .vg { color: #bb60d5 } /* Name.Variable.Global */
+.codehilite .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.codehilite .vm { color: #bb60d5 } /* Name.Variable.Magic */
+.codehilite .il { color: #40a070 } /* Literal.Number.Integer.Long */
+/* small niceties */
+main{max-width:72ch;margin:auto;padding:2rem 1rem}
+pre{overflow-x:auto}
+img{max-width:100%;height:auto}
+.admonition{border-left:4px solid rgba(0,0,0,.15);padding:.75rem 1rem;margin:1rem 0;background:rgba(0,0,0,.03);border-radius:.5rem}
+.admonition > .admonition-title{font-weight:600;margin-bottom:.25rem}
+</style>
+</head>
+<body>
+<main>
+<h1 id="hardware-washer-m3">Hardware Washer M3<a class="headerlink" href="#hardware-washer-m3" title="Permanent link">¶</a></h1>
+<p>note: This is part of OOMP the Oopen Organization Method For Parts. For more details: https://github.com/oomlout/oomp_base</p>
+<h2 id="part-details">part details<a class="headerlink" href="#part-details" title="Permanent link">¶</a></h2>
+<h3 id="name">name<a class="headerlink" href="#name" title="Permanent link">¶</a></h3>
+<ul>
+<li>name: Hardware Washer M3</li>
+<li>name_short: </li>
+</ul>
+<h3 id="id">id<a class="headerlink" href="#id" title="Permanent link">¶</a></h3>
+<ul>
+<li>oomp_id: hardware_washer_m3</li>
+<li>classification: hardware</li>
+<li>type: washer</li>
+<li>size: m3</li>
+<li>color: </li>
+<li>description_main: </li>
+<li>description_extra: </li>
+<li>manufacturer: </li>
+<li>part_number: </li>
+<li>bip 39 word 2: strategy payment</li>
+<li>bip 39 word 3: strategy payment burst</li>
+<li>bip 39 word: strategy payment burst blade strike couple snap antenna shrug swallow bubble already</li>
+</ul>
+<h3 id="other_codes">other_codes<a class="headerlink" href="#other_codes" title="Permanent link">¶</a></h3>
+<ul>
+<li>short_code: </li>
+<li>oomp_word: dolls koala beer</li>
+<li>oomp_word_emoji :dolls: :koala: :beer:</li>
+<li>md5_6_alpha: 4ggc6</li>
+<li>md5_6: 723ab6</li>
+</ul>
+<h3 id="all-codes">all codes<a class="headerlink" href="#all-codes" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>barcode_manufacturer_metalmate</td>
+<td>5050420675253</td>
+</tr>
+<tr>
+<td>box_of_box_size_manufacturer_metalmate</td>
+<td>36000</td>
+</tr>
+<tr>
+<td>box_size_manufacturer_metalmate</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>classification</td>
+<td>hardware</td>
+</tr>
+<tr>
+<td>classification_name</td>
+<td>Hardware</td>
+</tr>
+<tr>
+<td>color</td>
+<td></td>
+</tr>
+<tr>
+<td>color_name</td>
+<td></td>
+</tr>
+<tr>
+<td>commonity_code</td>
+<td>7318220098</td>
+</tr>
+<tr>
+<td>description_extra</td>
+<td></td>
+</tr>
+<tr>
+<td>description_extra_name</td>
+<td></td>
+</tr>
+<tr>
+<td>description_main</td>
+<td></td>
+</tr>
+<tr>
+<td>description_main_name</td>
+<td></td>
+</tr>
+<tr>
+<td>description_or_color</td>
+<td></td>
+</tr>
+<tr>
+<td>directory</td>
+<td>parts/hardware_washer_m3</td>
+</tr>
+<tr>
+<td>distributor_current</td>
+<td>orbital_fasteners</td>
+</tr>
+<tr>
+<td>distributors</td>
+<td>[]</td>
+</tr>
+<tr>
+<td>filter</td>
+<td></td>
+</tr>
+<tr>
+<td>from_yaml</td>
+<td>False</td>
+</tr>
+<tr>
+<td>github_link</td>
+<td>https://github.com/oomlout/oomlout_oomp_part_src/tree/main/parts/hardware_washer_m3</td>
+</tr>
+<tr>
+<td>id</td>
+<td>hardware_washer_m3</td>
+</tr>
+<tr>
+<td>kicad_reference</td>
+<td></td>
+</tr>
+<tr>
+<td>manufacturer</td>
+<td></td>
+</tr>
+<tr>
+<td>manufacturer_name</td>
+<td></td>
+</tr>
+<tr>
+<td>manufacturers</td>
+<td>[]</td>
+</tr>
+<tr>
+<td>markdown_full</td>
+<td><a href="https://github.com/oomlout/oomlout_oomp_part_src/tree/main/parts/hardware_washer_m3/working">hardware_washer_m3</a><br><a href="https://github.com/oomlout/oomlout_oomp_part_src/tree/main/parts/hardware_washer_m3/working">w3</a><br><a href="https://github.com/oomlout/oomlout_oomp_part_src/tree/main/parts/hardware_washer_m3/working">Hardware Washer M3</a><br><br></td>
+</tr>
+<tr>
+<td>markdown_short</td>
+<td><a href="https://github.com/oomlout/oomlout_oomp_part_src/tree/main/parts/hardware_washer_m3/working">hardware_washer_m3</a><br><br></td>
+</tr>
+<tr>
+<td>md5</td>
+<td>723ab6c63a09d9a8c4eb81703da86eb6</td>
+</tr>
+<tr>
+<td>md5_10</td>
+<td>723ab6c63a</td>
+</tr>
+<tr>
+<td>md5_5</td>
+<td>723ab</td>
+</tr>
+<tr>
+<td>md5_6</td>
+<td>723ab6</td>
+</tr>
+<tr>
+<td>md5_6_alpha</td>
+<td>4ggc6</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Hardware Washer M3</td>
+</tr>
+<tr>
+<td>name_manufacturer_metalmate</td>
+<td>3mm Bright Plain Washer Form A Self Colour DIN 125A</td>
+</tr>
+<tr>
+<td>oomp_id</td>
+<td>hardware_washer_m3</td>
+</tr>
+<tr>
+<td>oomp_key</td>
+<td>oomp_hardware_washer_m3</td>
+</tr>
+<tr>
+<td>oomp_word</td>
+<td>dolls koala beer</td>
+</tr>
+<tr>
+<td>oomp_word_emoji</td>
+<td>:dolls: :koala: :beer:</td>
+</tr>
+<tr>
+<td>oomp_word_emoji_list</td>
+<td>[':dolls:', ':koala:', ':beer:']</td>
+</tr>
+<tr>
+<td>oomp_word_list</td>
+<td>['dolls', 'koala', 'beer']</td>
+</tr>
+<tr>
+<td>part_number</td>
+<td></td>
+</tr>
+<tr>
+<td>part_number_distributor_orbital_fasteners</td>
+<td>1711000</td>
+</tr>
+<tr>
+<td>part_number_manufacturer_metalmate</td>
+<td>0412T39</td>
+</tr>
+<tr>
+<td>part_number_name</td>
+<td></td>
+</tr>
+<tr>
+<td>quantity_current</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>short_code</td>
+<td>w3</td>
+</tr>
+<tr>
+<td>size</td>
+<td>m3</td>
+</tr>
+<tr>
+<td>size_name</td>
+<td>M3</td>
+</tr>
+<tr>
+<td>type</td>
+<td>washer</td>
+</tr>
+<tr>
+<td>type_name</td>
+<td>Washer</td>
+</tr>
+<tr>
+<td>webpage_distributor_orbital_fasteners</td>
+<td>https://www.orbitalfasteners.co.uk/products/m3-mild-steel-form-a-flat-washer-bright-zinc-plated-din-125-1a-3-2x7x05mm-</td>
+</tr>
+<tr>
+<td>webpage_manufacturer_metalmate</td>
+<td>https://www.harclob2b.com/3mm-bright-plain-washer-form-a-self-colour-din-125-0412t39</td>
+</tr>
+</tbody>
+</table>
+</main>
+</body>
+</html>

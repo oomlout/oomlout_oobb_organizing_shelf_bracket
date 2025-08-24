@@ -14,6 +14,7 @@ def main(**kwargs):
         import scad
         kwargs2 = copy.deepcopy(kwargs)
         kwargs2["typ"] = "all"
+        kwargs2["save_type"] = "all"
         scad.main(**kwargs2)
     
 
