@@ -611,6 +611,22 @@ def get_shelf_bracket_version_2(thing, **kwargs):
         p3["rot"] = rot1
         oobb_base.append_full(thing,**p3)
 
+        #add flat bit to front of an m6 bolt attachment style 3x2 at the tip
+        if attachment_style == "m6_bolt":
+            p3 = copy.deepcopy(kwargs)
+            p3["type"] = "p"
+            p3["shape"] = f"oobb_plate"    
+            p3["width"] = 3
+            p3["height"] = 2
+            p3["depth"] = depth    
+            #p3["m"] = "#"
+            pos1 = copy.deepcopy(pos)         
+            pos1[0] += (width - 1) / 2 * 15 - 15
+            pos1[1] += (height - 1) / 2 * 15 - 15/2
+
+            p3["pos"] = pos1
+            oobb_base.append_full(thing,**p3)
+
 
     #add shelf cutout
     depth_endcap = 3
@@ -778,7 +794,8 @@ def get_shelf_bracket_version_2(thing, **kwargs):
                 if shap == "oobb_hole" and attachment_style == "m6_bolt":
                     #add the other side
                     shifts  =[15,-15,-30]
-
+                    depth_little_adjustment = -4
+                    depth_big_adjustment = 60
                     if width == 11:
                         shifts.append(-45)
                         shifts.append(75)
@@ -787,7 +804,12 @@ def get_shelf_bracket_version_2(thing, **kwargs):
                         shifts.append(30)
                     for shift in shifts:
                         p4 = copy.deepcopy(p3)
-                        p4["depth"] += -4
+
+                        if shift > 30:
+                            p4["depth"] += depth_big_adjustment
+                        else:
+                            p4["depth"] += depth_little_adjustment
+                            
                         pos1 = copy.deepcopy(p3["pos"])
                         pos1[0] += shift
                         p4["pos"] = pos1
